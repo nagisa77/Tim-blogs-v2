@@ -1,0 +1,13 @@
+:root {
+  --header-background-color: #344e41;
+  --content-background-color: #dad7cd;
+  --header-text-color: #dad7cd;
+  --content-text-color: #344e41;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Noto Serif', serif;
+}
