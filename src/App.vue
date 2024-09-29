@@ -2,19 +2,17 @@
   <div class="site">
     <header class="site-header-desktop">
       <h1 class="header-text header-title">Tim's Blog</h1>
-      <TypingEffect class="header-text header-subtitle" :strings="['在离开之前，一切都是过程. ', '追求自由～ ']" />
-      <div class="header-text header-route">
-        <li class="header-route-item">
-          <router-link to="/">首页</router-link>
-        </li>
-        <li class="header-route-item">
-          <router-link to="/about">关于</router-link>
-        </li>
-        <li class="header-route-item">
-          <router-link to="/contact">链接🔗</router-link>
-        </li>
-      </div>
+      <HeaderContent />
     </header>
+    <header class="site-header-mobile"> 
+      <h1 class="header-text header-title-mobile">Tim's Blog</h1>
+      <el-icon size="30" class="header-menu-icon">
+        <Menu />
+      </el-icon>
+    </header>
+    <div class="header-content-mobile">
+      <HeaderContent />
+    </div>
     <div class="site-content">
       <router-view />
     </div>
@@ -22,11 +20,11 @@
 </template>
 
 <script>
-import TypingEffect from './components/TypingEffect.vue';
+import HeaderContent from './components/HeaderContent.vue';
 
 export default {
   components: {
-    TypingEffect,
+    HeaderContent,
   },
 };
 </script>
@@ -38,11 +36,39 @@ export default {
   height: 100%;
 }
 
+.header-title-mobile {
+  margin-left: 20px;
+  font-size: 30px;
+}
+
+.header-content-mobile {
+  width: 100%;
+  top: 100px;
+  height: 100%;
+  padding: 20px;
+  background-color: var(--header-background-color); 
+  display: block;
+  position: absolute;
+  z-index: 1000;
+}
+
 .site-header-desktop {
   height: calc(100vh - 200px);
   width: 300px;
   padding: 100px 60px;
   background-color: var(--header-background-color);
+}
+
+.header-menu-icon {
+  margin-right: 20px;
+  color: var(--header-text-color);
+}
+
+.site-header-mobile {
+  height: 100px;
+  background-color: var(--header-background-color);
+  width: 100%;
+  display: none;
 }
 
 .site-content {
@@ -55,30 +81,19 @@ export default {
   color: var(--header-text-color);
 }
 
-.header-subtitle {
-  padding-top: 30px;
-  font-weight: normal;
-}
+@media (max-width: 849px) { 
+  /* 移动端 */
+  .site {
+    flex-direction: column;
+  }
 
-.header-route {
-  padding-top: 80px;
-  font-weight: normal;
-  list-style-type: none;
-  line-height: 2;
-}
+  .site-header-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.header-route-item a {
-  transition: font-weight 0.3s ease;
-  text-decoration: none; /* 去掉下划线 */
-  color: inherit; /* 继承父元素的字体颜色 */
-}
-
-.header-route-item a:hover {
-  text-decoration: underline;
-  color: var(--hover-color); /* 可选：悬停时更改颜色 */
-}
-
-@media (max-width: 849px) {
   .site-header-desktop {
     display: none;
   }
@@ -98,6 +113,5 @@ export default {
   .site-content {
     width: calc(100% - 200px);
   }
-} 
-
+}
 </style>
