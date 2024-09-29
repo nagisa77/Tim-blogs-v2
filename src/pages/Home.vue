@@ -1,45 +1,49 @@
 <template>
   <div class="scroll-view-container">
-  <div class="scroll-view">
-    <div class="overlay"></div> <!-- 新增蒙层 -->
-    <div class="multi-column-layout">
-      <div class="content-container">
-        <div class="masonry">
-          <div class="masonry-item" v-for="(image, index) in images" :key="index" :body-style="{ padding: '0px' }">
-            <img :src="image.src" :alt="'Placeholder Image ' + index" class="responsive-image" />
-            <div style="padding: 18px;">
-              <p class="content-card-text">图片描述</p>
-              <!-- date icon + date -->
-              <span class="content-card-date">
-                <el-icon>
-                  <Calendar />
-                </el-icon>
-                2025-02-02
-              </span>
-            </div>
+    <div class="scroll-view">
+      <div class="overlay"></div>
+      <div class="multi-column-layout">
+        <div class="content-container">
+          <div class="masonry">
+            <router-link
+              v-for="(article, index) in articles"
+              :key="index"
+              :to="`/article/${article.metadata.slug}`" 
+              class="masonry-item"
+            >
+              <img :src="article.metadata.imgUrl" :alt="'Placeholder Image ' + index" class="responsive-image" />
+              <div style="padding: 18px;">
+                <p class="content-card-text">{{ article.metadata.title || '未命名文章' }}</p>
+                <span class="content-card-date">
+                  <el-icon>
+                    <Calendar />
+                  </el-icon>
+                  {{ article.metadata.date || '未知日期' }}                
+                </span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
+import { loadArticles } from '@/utils/articles-loader';
+
 export default {
   name: 'HomePage',
 
   data() {
     return {
-      images: [
-        { 'src': 'https://via.placeholder.com/800x600' },
-        { 'src': 'https://via.placeholder.com/250' },
-        { 'src': 'https://via.placeholder.com/200' },
-        { 'src': 'https://via.placeholder.com/250' },
-        { 'src': 'https://via.placeholder.com/200' },
-        { 'src': 'https://via.placeholder.com/150' },
-      ],
+      articles: [], // 存储加载的文章数据
     };
+  },
+  
+  created() {
+    // 在组件加载时加载文章
+    this.articles = loadArticles();
   },
 }
 </script>
@@ -76,12 +80,15 @@ export default {
   margin-bottom: 40px;
   break-inside: avoid;
   background-color: var(--content-card-background-color);
-  border-radius: 10px;
+  text-decoration: none; /* 取消下划线 */
+  color: inherit; /* 继承父元素的颜色 */
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block; /* 确保是块级元素以支持链接 */
 }
 
 .masonry-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05); /* 适度缩放 */
   transition: transform 0.3s ease-in-out;
 }
 
@@ -93,6 +100,7 @@ export default {
 .responsive-image {
   width: 100%;
   display: block;
+  border-radius: 20px 20px 0 0;
 }
 
 .title {

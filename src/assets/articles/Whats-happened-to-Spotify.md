@@ -1,6 +1,6 @@
 +++
 title = 'What Happened to Spotify? 翻译搬运'
-date = 2024-09-03T15:47:07+08:00
+date = 2024-09-03
 +++
 ## 回声室、利润与自2017年以来艺术家发现的衰退
 [Rosie Hoggmascall](https://medium.com/@rosiehoggmascall?source=post_page-----2e9ab9ce313d--------------------------------)  

@@ -1,7 +1,6 @@
 +++
 title = "IDEA破解"
-date = 2024-08-29T17:31:48+08:00
-draft = false
+date = 2024-08-29
 +++
 
 [查看原文](https://blog.csdn.net/m0_37632915/article/details/137877994)
