@@ -6,11 +6,11 @@
     </header>
     <header class="site-header-mobile"> 
       <h1 class="header-text header-title-mobile">Tim's Blog</h1>
-      <el-icon size="30" class="header-menu-icon">
+      <el-icon size="30" class="header-menu-icon" @click="toggleMenu">
         <Menu />
       </el-icon>
     </header>
-    <div class="header-content-mobile">
+    <div class="header-content-mobile" :class="{ 'menu-visible': menuVisible }">
       <HeaderContent />
     </div>
     <div class="site-content">
@@ -25,6 +25,16 @@ import HeaderContent from './components/HeaderContent.vue';
 export default {
   components: {
     HeaderContent,
+  },
+  data() {
+    return {
+      menuVisible: false,
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+    },
   },
 };
 </script>
@@ -44,12 +54,18 @@ export default {
 .header-content-mobile {
   width: 100%;
   top: 100px;
-  height: 100%;
-  padding: 20px;
-  background-color: var(--header-background-color); 
-  display: block;
+  height: 0;
+  padding: 0 20px;
+  background-color: var(--header-background-color);
   position: absolute;
   z-index: 1000;
+  overflow: hidden;
+  transition: height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.header-content-mobile.menu-visible {
+  height: calc(100% - 100px);
+  padding: 20px;
 }
 
 .site-header-desktop {

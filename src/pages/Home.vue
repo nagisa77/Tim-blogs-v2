@@ -128,6 +128,12 @@ export default {
   }
 }
 
+@media (max-width: 849px) {
+  .multi-column-layout {
+    padding: 50px 30px;
+  }
+}
+
 @media (min-width: 541px) and (max-width: 899px) {
   .masonry {
     column-count: 2;
