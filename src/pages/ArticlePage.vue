@@ -41,30 +41,30 @@ export default {
   justify-content: center;
   height: 100%;
   line-height: 1.5;
+  color: var(--article-text-color);
 }
 
 .markdown-content {
-  background-color: #f5f5f5;
   padding: 20px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 ::v-deep .markdown-content a {
-  color: green;
-}
-
-::v-deep pre {
-  background-color: white;
-  border-radius: 10px;
+  color: var(--article-link-color);
 }
 
 ::v-deep code {
   font-family: monospace;
-  color: #d6336c;
+  color: var(--article-code-text-color);
   font-size: 15px;
 
   white-space: pre-wrap; 
   word-wrap: break-word; 
+}
+
+::v-deep pre {
+  background-color: var(--article-code-background-color);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .scroll-view {

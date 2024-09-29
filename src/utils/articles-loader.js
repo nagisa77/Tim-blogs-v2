@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 // load articles function
 export function loadArticles() {
   const articles = require.context('@/assets/articles', false, /\.md$/);
@@ -17,14 +16,10 @@ export function loadArticles() {
         const [key, value] = line.split('=');
         metadata[key.trim()] = value.trim();
       });
-
-      metadata.slug = Buffer.from(metadata.title).toString('base64');
-
-      // 移除元数据部分（包括+++）
+      metadata.slug = metadata.title.trim().replace(/\s+/g, '-');
       contentWithoutMetadata = content.replace(metadataMatch[0], '').trim();
     }
 
-    // 新增逻辑：检查imgUrl是否存在
     if (!metadata.imgUrl) {
       // eslint-disable-next-line no-useless-escape
       const urlMatch = content.match(/https?:\/\/[^"\s]+\.(jpg|jpeg|png|gif)/);
@@ -38,7 +33,7 @@ export function loadArticles() {
     return {
       file,
       metadata,
-      content: contentWithoutMetadata // 新增字段：剔除元数据后的文章内容
+      content: contentWithoutMetadata 
     };
   });
 

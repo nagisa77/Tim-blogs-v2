@@ -1,5 +1,5 @@
 +++
-title = 'What Happened to Spotify? 翻译搬运'
+title = 'What Happened to Spotify翻译搬运'
 date = 2024-09-03
 +++
 ## 回声室、利润与自2017年以来艺术家发现的衰退

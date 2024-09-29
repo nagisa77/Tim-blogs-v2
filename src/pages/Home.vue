@@ -42,7 +42,6 @@ export default {
   },
   
   created() {
-    // 在组件加载时加载文章
     this.articles = loadArticles();
   },
 }
@@ -129,13 +128,13 @@ export default {
   }
 }
 
-@media (min-width: 650px) and (max-width: 899px) {
+@media (min-width: 541px) and (max-width: 899px) {
   .masonry {
     column-count: 2;
   }
 }
 
-@media (max-width: 649px) {
+@media (max-width: 540px) {
   .masonry {
     column-count: 1;
   }
