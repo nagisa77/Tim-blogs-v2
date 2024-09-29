@@ -3,11 +3,13 @@
   --content-background-color: #dad7cd;
   --header-text-color: #dad7cd;
   --content-text-color: #344e41;
+  --content-card-background-color: #e8e6e1;
+  --content-card-text-color: #344e41;
 }
 
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Noto Serif', serif;
+  font-family: 'Arial', sans-serif;
 }
