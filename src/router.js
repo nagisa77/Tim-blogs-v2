@@ -1,34 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import HomePage from './pages/Home.vue';
 // import About from '../pages/About.vue';
-// import Contact from '../pages/Contact.vue';
 import ArticlePage from './pages/ArticlePage.vue';
+import LinksPage from './pages/Links.vue';
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: HomePage,
-  },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: About,
-  // },
-  // {
-  //   path: '/contact',
-  //   name: 'Contact',
-  //   component: Contact,
-  // },
-  {
-    path: '/article/:slug',
-    name: 'Article',
-    component: ArticlePage, // 文章组件
-  },
+  { path: '/', component: HomePage },
+  { path: '/article/:slug', component: ArticlePage },
+  { path: '/links', component: LinksPage },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

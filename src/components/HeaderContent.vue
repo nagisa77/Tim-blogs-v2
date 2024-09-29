@@ -26,7 +26,7 @@ export default {
       default: () => [
         { name: '首页', path: '/' },
         { name: '关于', path: '/about' },
-        { name: '链接🔗', path: '/contact' },
+        { name: '链接🔗', path: '/links' },
       ],
     },
   },
