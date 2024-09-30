@@ -60,6 +60,8 @@ export default {
 
 .scroll-view-container {
   position: relative;
+
+  box-shadow: inset 20px 0 20px -20px rgba(0, 0, 0, 0.8);
 }
 
 .scroll-view {
@@ -68,15 +70,15 @@ export default {
 }
 
 .multi-column-layout {
-  padding: 150px 30px;
+  padding: 150px 50px;
 }
 
 .masonry {
-  column-gap: 40px;
+  column-gap: 20px;
 }
 
 .masonry-item {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   break-inside: avoid;
   background-color: var(--content-card-background-color);
   text-decoration: none; /* 取消下划线 */
@@ -128,9 +130,17 @@ export default {
   }
 }
 
-@media (max-width: 849px) {
+@media (max-width: 649px) {
   .multi-column-layout {
     padding: 50px 30px;
+  }
+
+  .scroll-view {
+    height: calc(100vh - 100px);
+  }
+
+  .scroll-view-container {
+    box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8);
   }
 }
 

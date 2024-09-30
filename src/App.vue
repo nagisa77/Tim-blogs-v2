@@ -2,7 +2,7 @@
   <div class="site">
     <header class="site-header-desktop">
       <h1 class="header-text header-title">Tim's Blog</h1>
-      <HeaderContent />
+      <HeaderContent @route-clicked="closeMenu" />
     </header>
     <header class="site-header-mobile"> 
       <h1 class="header-text header-title-mobile">Tim's Blog</h1>
@@ -11,7 +11,7 @@
       </el-icon>
     </header>
     <div class="header-content-mobile" :class="{ 'menu-visible': menuVisible }">
-      <HeaderContent />
+      <HeaderContent @route-clicked="closeMenu" />
     </div>
     <div class="site-content">
       <router-view />
@@ -34,6 +34,9 @@ export default {
   methods: {
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
+    },
+    closeMenu() {
+      this.menuVisible = false;
     },
   },
 };
@@ -97,7 +100,7 @@ export default {
   color: var(--header-text-color);
 }
 
-@media (max-width: 849px) { 
+@media (max-width: 649px) { 
   /* 移动端 */
   .site {
     flex-direction: column;
@@ -116,10 +119,11 @@ export default {
 
   .site-content {
     width: 100%;
+    height: calc(100vh - 100px);
   }
 }
 
-@media (min-width: 850px) and (max-width: 1099px) {
+@media (min-width: 650px) and (max-width: 1099px) {
   .site-header-desktop {
     height: calc(100vh - 200px);
     width: 200px;

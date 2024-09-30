@@ -3,7 +3,12 @@
     <TypingEffect class="header-text header-subtitle" :strings="strings" />
     <div class="header-text header-route">
       <li v-for="item in routes" :key="item.name" class="header-route-item">
-        <router-link :to="item.path">{{ item.name }}</router-link>
+        <router-link 
+          :to="item.path" 
+          @click="handleRouteClick(item.name)"
+        >
+          {{ item.name }}
+        </router-link>
       </li>
     </div>
   </div>
@@ -19,15 +24,23 @@ export default {
   props: {
     strings: {
       type: Array,
-      default: () => ['在离开之前，一切都是过程. ', '追求自由～ '],
+      default: () => [
+        '在离开之前，一切都是过程. ', 
+        '追求自由～ ',
+      ],
     },
     routes: {
       type: Array,
       default: () => [
         { name: '首页', path: '/' },
-        { name: '关于', path: '/about' },
+        // { name: '关于', path: '/about' },
         { name: '链接🔗', path: '/links' },
       ],
+    },
+  },
+  methods: {
+    handleRouteClick(routeName) {
+      this.$emit('route-clicked', routeName);
     },
   },
 };

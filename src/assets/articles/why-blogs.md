@@ -1,5 +1,5 @@
 +++
-title = 'Why Blogs?'
+title = 'Why Blogs'
 date = 2024-08-29
 +++
 

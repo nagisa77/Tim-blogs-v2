@@ -1,20 +1,21 @@
 <template>
   <div class="links-page">
-    <h1>我的联系方式</h1>
+    <div class="links-content-container">
+      <h1>我的联系方式 🔗</h1>
+      <div class="links-container">
+        <div v-for="link in links" :key="link.title" class="links-item">
+          <img class="links-item-icon" :src="link.icon" :alt="link.title" />
+          <a class="links-item-title" :href="link.url">{{ link.title }}</a>
+        </div>
 
-    <div class="links-container">
-      <div v-for="link in links" :key="link.title" class="links-item">
-        <img class="links-item-icon" :src="link.icon" :alt="link.title" />
-        <a class="links-item-title" :href="link.url">{{ link.title }}</a>
+        <div class="links-item" @click="copyToClipboard('nagisa12321')">
+          <img class="links-item-icon"
+            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWgcU1gDqq-tVWNh9se74lXiHt48_dTS9frg&s'
+            alt="Wechat" />
+          <a class="links-item-title">nagisa12321</a>
+        </div>
+
       </div>
-
-      <div class="links-item" @click="copyToClipboard('nagisa12321')">
-        <img class="links-item-icon"
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWgcU1gDqq-tVWNh9se74lXiHt48_dTS9frg&s'
-          alt="Wechat" />
-        <a class="links-item-title">nagisa12321</a>
-      </div>
-
     </div>
   </div>
 </template>
@@ -68,16 +69,26 @@ export default {
 
 <style scoped>
 .links-page {
-  padding: 100px;
-
+  padding: 60px;
+  height: 100%;
   color: var(--content-text-color);
+  background-color: var(--header-background-color);
+}
+
+.links-content-container {
+  background-color: var(--content-background-color);
+  padding: 40px 80px;
+  border-radius: 45px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 .links-container {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+
+  margin-bottom: 30px;
 }
 
 .links-item {
@@ -95,7 +106,6 @@ export default {
 
   transform: scale(1.10);
   transition: transform 0.3s ease;
-
 }
 
 .links-item-title {
@@ -119,4 +129,16 @@ export default {
   border-radius: 50%;
   padding: 5px;
 }
+
+@media (max-width: 649px) {
+  .links-content-container {
+    padding: 20px 40px;
+  }
+
+  .links-page {
+    padding: 20px;
+  }
+}
+
+
 </style>
