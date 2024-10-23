@@ -1,10 +1,13 @@
 <template>
   <div class="site">
-    <header class="site-header-desktop">
+    <header
+      class="site-header-desktop">
       <h1 class="header-text header-title">Tim's Blog</h1>
       <HeaderContent @route-clicked="closeMenu" />
     </header>
-    <header class="site-header-mobile"> 
+    <header
+      class="site-header-mobile"
+      :class="{ hidden: !isHeaderVisible }"> 
       <h1 class="header-text header-title-mobile">Tim's Blog</h1>
       <el-icon size="30" class="header-menu-icon" @click="toggleMenu">
         <Menu />
@@ -29,7 +32,15 @@ export default {
   data() {
     return {
       menuVisible: false,
+      lastScrollY: 0,  // 用于记录上一次的滚动位置
+      isHeaderVisible: true, // 控制header的显示与隐藏
     };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);  // 监听滚动事件
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);  // 移除滚动事件监听
   },
   methods: {
     toggleMenu() {
@@ -37,6 +48,26 @@ export default {
     },
     closeMenu() {
       this.menuVisible = false;
+    },
+    handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      // 滚动到顶部时，header保持显示
+      if (currentScrollY === 0) {
+        this.isHeaderVisible = true;
+        console.log('滚动到顶部，显示header');
+      } else if (currentScrollY > this.lastScrollY) {
+        // 向下滚动，隐藏header
+        this.isHeaderVisible = false;
+        console.log('向下滚动，隐藏header');
+      } else if (currentScrollY < this.lastScrollY) {
+        // 向上滚动，显示header
+        this.isHeaderVisible = true;
+        console.log('向上滚动，显示header');
+      }
+
+      // 更新最后的滚动位置
+      this.lastScrollY = currentScrollY;
     },
   },
 };
@@ -88,6 +119,16 @@ export default {
   background-color: var(--header-background-color);
   width: 100%;
   display: none;
+  position: fixed; /* 保证header在移动端固定在顶部 */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0); /* 初始状态显示 */
+}
+
+.site-header-mobile.hidden {
+  transform: translateY(-100%); /* 隐藏时将header移出视口 */
 }
 
 .site-content {
