@@ -1,13 +1,16 @@
 <template>
   <div class="markdown-container">
     <div class="scroll-view">
-    <div v-html="compiledMarkdown" class="markdown-content"></div>
+      <div v-if="loading" class="loading-container">
+        加载中...
+      </div>
+      <div v-else v-html="compiledMarkdown" class="markdown-content"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { marked } from 'marked';
 import { useRoute } from 'vue-router'; 
 import { loadArticles } from '@/utils/articles-loader';
@@ -16,18 +19,23 @@ export default {
   name: 'ArticlePage',
   setup() {
     const compiledMarkdown = ref('');
-
+    const loading = ref(true); // 控制加载状态
     const route = useRoute();
 
-    const articles = loadArticles();
-    for (const article of articles) {
-      if (article.metadata.slug === route.params.slug) {
-        compiledMarkdown.value = marked(article.content);
+    onMounted(async () => {
+      const articles = await loadArticles(); // 等待加载文章
+      for (const article of articles) {
+        if (article.metadata.slug === route.params.slug) {
+          compiledMarkdown.value = marked(article.content);
+          break; // 找到后可以退出循环
+        }
       }
-    }
+      loading.value = false; // 加载完成
+    });
 
     return {
       compiledMarkdown,
+      loading,
     };
   },
 };
@@ -49,6 +57,13 @@ export default {
   padding: 50px;
 }
 
+.loading-container {
+  text-align: center;
+  font-size: 18px;
+  color: var(--article-text-color);
+  padding: 50px 0;
+}
+
 ::v-deep .markdown-content a {
   color: var(--article-link-color);
 }
@@ -57,7 +72,6 @@ export default {
   font-family: monospace;
   color: var(--article-code-text-color);
   font-size: 15px;
-
   white-space: pre-wrap; 
   word-wrap: break-word; 
 }
@@ -83,11 +97,9 @@ export default {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
-
 @media (max-width: 649px) {
   .markdown-container {    
     box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8);
   }
 }
-
 </style>

@@ -4,7 +4,12 @@
       <div class="overlay"></div>
       <div class="multi-column-layout">
         <div class="content-container">
-          <div class="masonry">
+          <!-- 加载中提示 -->
+          <div v-if="loading" class="loading-container">
+            加载中...
+          </div>
+          <!-- 文章内容 -->
+          <div v-else class="masonry">
             <router-link
               v-for="(article, index) in articles"
               :key="index"
@@ -38,11 +43,17 @@ export default {
   data() {
     return {
       articles: [], // 存储加载的文章数据
+      loading: true, // 控制加载状态
     };
   },
   
-  created() {
-    this.articles = loadArticles();
+  async created() {
+    this.loading = true; // 设置加载状态
+    try {
+      this.articles = await loadArticles();
+    } finally {
+      this.loading = false; // 加载完成后关闭加载状态
+    }
   },
 }
 </script>
@@ -60,7 +71,6 @@ export default {
 
 .scroll-view-container {
   position: relative;
-
   box-shadow: inset 20px 0 20px -20px rgba(0, 0, 0, 0.8);
 }
 
@@ -73,6 +83,13 @@ export default {
   padding: 150px 50px;
 }
 
+.loading-container {
+  text-align: center;
+  font-size: 18px;
+  color: var(--content-card-text-color);
+  padding: 50px 0;
+}
+
 .masonry {
   column-gap: 20px;
 }
@@ -81,15 +98,15 @@ export default {
   margin-bottom: 20px;
   break-inside: avoid;
   background-color: var(--content-card-background-color);
-  text-decoration: none; /* 取消下划线 */
-  color: inherit; /* 继承父元素的颜色 */
+  text-decoration: none;
+  color: inherit;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: block; /* 确保是块级元素以支持链接 */
+  display: block;
 }
 
 .masonry-item:hover {
-  transform: scale(1.05); /* 适度缩放 */
+  transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
 }
 
