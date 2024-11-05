@@ -1,7 +1,7 @@
 const GITHUB_API_BASE = 'https://api.github.com';
 const REPO_OWNER = 'nagisa77';
 const REPO_NAME = 'blogs';
-const ACCESS_TOKEN = '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';
+const ACCESS_TOKEN = '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';
 
 // Function to load articles from GitHub
 export async function loadArticles() {
