@@ -1,8 +1,8 @@
 <template>
   <div class="markdown-container">
     <div class="scroll-view">
-      <div v-if="loading" class="loading-container">
-        加载中...
+      <div v-if="loading" class="loading-icon">
+        <l-tail-chase size="40" speed="1.75" color="black"></l-tail-chase>
       </div>
       <div v-else v-html="compiledMarkdown" class="markdown-content"></div>
     </div>
@@ -13,7 +13,10 @@
 import { ref, onMounted } from 'vue';
 import { marked } from 'marked';
 import { useRoute } from 'vue-router'; 
-import { loadArticles } from '@/utils/articles-loader';
+import { loadArticlesFromFirebase } from '@/utils/articles-loader';
+import { tailChase } from 'ldrs'
+
+tailChase.register()
 
 export default {
   name: 'ArticlePage',
@@ -23,7 +26,7 @@ export default {
     const route = useRoute();
 
     onMounted(async () => {
-      const articles = await loadArticles(); // 等待加载文章
+      const articles = await loadArticlesFromFirebase(); // 等待加载文章
       for (const article of articles) {
         if (article.metadata.slug === route.params.slug) {
           compiledMarkdown.value = marked(article.content);
@@ -85,6 +88,13 @@ export default {
 .scroll-view {
   height: 100vh;
   overflow-y: auto;
+}
+
+.loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 ::v-deep img {

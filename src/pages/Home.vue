@@ -5,8 +5,8 @@
       <div class="multi-column-layout">
         <div class="content-container">
           <!-- 加载中提示 -->
-          <div v-if="loading" class="loading-container">
-            加载中...
+          <div v-if="loading" class="loading-icon">
+            <l-tail-chase size="40" speed="1.75" color="black"></l-tail-chase>
           </div>
           <!-- 文章内容 -->
           <div v-else class="masonry">
@@ -35,7 +35,10 @@
 </template>
 
 <script>
-import { loadArticles } from '@/utils/articles-loader';
+import { loadArticlesFromFirebase } from '@/utils/articles-loader';
+import { tailChase } from 'ldrs'
+
+tailChase.register()
 
 export default {
   name: 'HomePage',
@@ -50,7 +53,7 @@ export default {
   async created() {
     this.loading = true; // 设置加载状态
     try {
-      this.articles = await loadArticles();
+      this.articles = await loadArticlesFromFirebase();
     } finally {
       this.loading = false; // 加载完成后关闭加载状态
     }
@@ -113,6 +116,13 @@ export default {
 .content-container {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .responsive-image {
