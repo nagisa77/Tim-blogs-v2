@@ -16,7 +16,8 @@
               :to="`/article/${article.metadata.slug}`" 
               class="masonry-item"
             >
-              <img :src="article.metadata.imgUrl" :alt="'Placeholder Image ' + index" class="responsive-image" />
+              <!-- 仅当 imgUrl 存在且不为空字符串时显示图像 -->
+              <img v-if="article.metadata.imgUrl && article.metadata.imgUrl.trim() !== ''" :src="article.metadata.imgUrl" :alt="'Placeholder Image ' + index" class="responsive-image" />
               <div style="padding: 18px;">
                 <p class="content-card-text">{{ article.metadata.title || '未命名文章' }}</p>
                 <span class="content-card-date">
