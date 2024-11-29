@@ -87,6 +87,7 @@ export default {
 
 .scroll-view {
   height: 100vh;
+  width: 100%;
   overflow-y: auto;
 }
 

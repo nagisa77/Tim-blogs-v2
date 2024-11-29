@@ -2,19 +2,17 @@
   <div class="site">
     <header
       class="site-header-desktop">
-      <h1 class="header-text header-title">Tim's Blog</h1>
-      <HeaderContent @route-clicked="closeMenu" />
+      <h1 class="header-text header-title" @click="navigateToHome">Tim's Blog</h1>
+      <HeaderContent />
     </header>
-    <header
-      class="site-header-mobile"
-      :class="{ hidden: !isHeaderVisible }"> 
-      <h1 class="header-text header-title-mobile">Tim's Blog</h1>
+    <header class="site-header-mobile"> 
+      <h1 class="header-text header-title-mobile" @click="navigateToHome">Tim's Blog</h1>
       <el-icon size="30" class="header-menu-icon" @click="toggleMenu">
         <Menu />
       </el-icon>
     </header>
     <div class="header-content-mobile" :class="{ 'menu-visible': menuVisible }">
-      <HeaderContent @route-clicked="closeMenu" />
+      <HeaderContent />
     </div>
     <div class="site-content">
       <router-view />
@@ -32,15 +30,7 @@ export default {
   data() {
     return {
       menuVisible: false,
-      lastScrollY: 0,  // 用于记录上一次的滚动位置
-      isHeaderVisible: true, // 控制header的显示与隐藏
     };
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);  // 监听滚动事件
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);  // 移除滚动事件监听
   },
   methods: {
     toggleMenu() {
@@ -49,25 +39,8 @@ export default {
     closeMenu() {
       this.menuVisible = false;
     },
-    handleScroll() {
-      const currentScrollY = window.scrollY;
-
-      // 滚动到顶部时，header保持显示
-      if (currentScrollY === 0) {
-        this.isHeaderVisible = true;
-        console.log('滚动到顶部，显示header');
-      } else if (currentScrollY > this.lastScrollY) {
-        // 向下滚动，隐藏header
-        this.isHeaderVisible = false;
-        console.log('向下滚动，隐藏header');
-      } else if (currentScrollY < this.lastScrollY) {
-        // 向上滚动，显示header
-        this.isHeaderVisible = true;
-        console.log('向上滚动，显示header');
-      }
-
-      // 更新最后的滚动位置
-      this.lastScrollY = currentScrollY;
+    navigateToHome() {
+      this.$router.push('/');
     },
   },
 };
@@ -161,6 +134,7 @@ export default {
   .site-content {
     width: 100%;
     height: calc(100vh - 100px);
+    padding-top: 100px;
   }
 }
 

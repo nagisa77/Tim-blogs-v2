@@ -23,3 +23,6 @@ pnpm-debug.log*
 *.sw?
 
 firebase-debug.log
+functions/
+firebase.json
+.firebaserc
