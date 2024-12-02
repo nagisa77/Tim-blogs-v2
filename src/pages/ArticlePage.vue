@@ -47,13 +47,8 @@ export default {
 <style scoped>
 .markdown-container {
   box-shadow: inset 20px 0 20px -20px rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
   line-height: 2.0;
-  color: var(--article-text-color);
 }
 
 .markdown-content {

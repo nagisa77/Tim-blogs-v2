@@ -1,20 +1,22 @@
 <template>
   <div class="site">
-    <header
-      class="site-header-desktop">
-      <h1 class="header-text header-title" @click="navigateToHome">Tim's Blog</h1>
-      <HeaderContent />
+    <header :class="['site-header-desktop', { collapsed: isMenuCollapsed }]">
+      <button class="menu-toggle" @click="toggleMenu">
+        {{ isMenuCollapsed ? '>>' : '<<' }}
+      </button>
+      <h1 class="header-text header-title" v-show="!isMenuCollapsed" @click="navigateToHome">Tim's Blog</h1>
+      <HeaderContent v-show="!isMenuCollapsed" />
     </header>
-    <header class="site-header-mobile"> 
+    <header class="site-header-mobile">
       <h1 class="header-text header-title-mobile" @click="navigateToHome">Tim's Blog</h1>
-      <el-icon size="30" class="header-menu-icon" @click="toggleMenu">
+      <el-icon size="30" class="header-menu-icon" @click="toggleMobileMenu">
         <Menu />
       </el-icon>
     </header>
     <div class="header-content-mobile" :class="{ 'menu-visible': menuVisible }">
       <HeaderContent />
     </div>
-    <div class="site-content">
+    <div :class="['site-content', { collapsed: isMenuCollapsed }]">
       <router-view />
     </div>
   </div>
@@ -29,15 +31,16 @@ export default {
   },
   data() {
     return {
-      menuVisible: false,
+      menuVisible: false, // 移动端菜单状态
+      isMenuCollapsed: false, // 桌面菜单状态
     };
   },
   methods: {
-    toggleMenu() {
+    toggleMobileMenu() {
       this.menuVisible = !this.menuVisible;
     },
-    closeMenu() {
-      this.menuVisible = false;
+    toggleMenu() {
+      this.isMenuCollapsed = !this.isMenuCollapsed;
     },
     navigateToHome() {
       this.$router.push('/');
@@ -58,6 +61,20 @@ export default {
   font-size: 30px;
 }
 
+.menu-toggle {
+  margin-bottom: 20px;
+  padding: 15px 15px;
+  background-color: var(--article-link-color);
+  border: none;
+  color: var(--button-text-color);
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.menu-toggle:hover {
+  background-color: var(--article-link-color);
+}
+
 .header-content-mobile {
   width: 100%;
   top: 100px;
@@ -75,11 +92,18 @@ export default {
   padding: 20px;
 }
 
+.site-header-desktop.collapsed {
+  width: 44px;
+  padding: 100px 0px;
+  height: calc(100vh - 200px);
+}
+
 .site-header-desktop {
   height: calc(100vh - 200px);
   width: 300px;
   padding: 100px 60px;
   background-color: var(--header-background-color);
+  transition: width 0.3s ease;
 }
 
 .header-menu-icon {
@@ -108,6 +132,11 @@ export default {
   height: 100vh;
   width: calc(100% - 300px);
   background-color: var(--content-background-color);
+  transition: margin-left 0.3s ease;
+}
+
+.site-content.collapsed {
+  width: calc(100% - 44px);
 }
 
 .header-text {
@@ -135,6 +164,10 @@ export default {
     width: 100%;
     height: calc(100vh - 100px);
     padding-top: 100px;
+  }
+
+  .site-content.collapsed {
+    width: 100%;
   }
 }
 
