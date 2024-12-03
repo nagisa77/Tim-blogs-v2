@@ -2,10 +2,15 @@
   <div class="links-page">
     <div class="links-content-container">
       <h1>我的联系方式 🔗</h1>
-      <div class="links-container">
+      <!-- 如果加载中，显示 loading 标志 -->
+      <div v-if="loading" class="loading-icon">
+        <l-tail-chase size="40" speed="1.75" color="black"></l-tail-chase>
+      </div>
+      <!-- 如果加载完成，显示 links -->
+      <div v-else class="links-container">
         <div v-for="link in links" :key="link.title" class="links-item">
           <img class="links-item-icon" :src="link.icon" :alt="link.title" />
-          <a class="links-item-title" :href="link.url">{{ link.title }}</a>
+          <a class="links-item-title" :href="link.url" target="_blank">{{ link.title }}</a>
         </div>
 
         <div class="links-item" @click="copyToClipboard('nagisa12321')">
@@ -14,7 +19,6 @@
             alt="Wechat" />
           <a class="links-item-title">nagisa12321</a>
         </div>
-
       </div>
     </div>
   </div>
@@ -22,47 +26,43 @@
 
 <script>
 export default {
-  name: 'LinksPage',
-
+  name: "LinksPage",
+  data() {
+    return {
+      links: [], // 动态获取的 links 数据
+      loading: true, // 加载状态
+    };
+  },
   methods: {
+    async fetchLinks() {
+      try {
+        const response = await fetch("https://loadbloginfo-xg53l22czq-uc.a.run.app");
+        if (!response.ok) {
+          throw new Error("Failed to fetch links");
+        }
+        const data = await response.json();
+        this.links = data.links;
+      } catch (error) {
+        console.error("Error fetching links:", error);
+        this.$message({
+          message: "加载失败，请稍后再试",
+          type: "error",
+        });
+      } finally {
+        this.loading = false;
+      }
+    },
     copyToClipboard(title) {
       navigator.clipboard.writeText(title).then(() => {
         this.$message({
-          message: '已复制到剪贴板',
-          type: 'success'
+          message: "已复制到剪贴板",
+          type: "success",
         });
       });
-    }
+    },
   },
-
-  data() {
-    return {
-      links: [
-        {
-          title: 'nagisa77',
-          icon: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
-          url: 'https://github.com/nagisa77',
-        },
-
-        {
-          title: 'blog',
-          icon: 'https://cdn1.iconfinder.com/data/icons/logotypes/32/blogger-1024.png',
-          url: 'https://nagisa77.github.io',
-        },
-
-        {
-          title: '猫仔布丁🍮',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrLEt7CpnTRQ1va0on-RGO3aDsgpdlNFUoaw&s',
-          url: "https://v.douyin.com/ihMExh2L/?utm_campaign=client_share&app=aweme&utm_medium=ios&tt_from=more&utm_source=more"
-        },
-
-        {
-          title: 'jtchen78',
-          icon: 'https://i.pinimg.com/474x/1e/d6/e0/1ed6e0a9e69176a5fdb7e090a1046b86.jpg',
-          url: "https://www.instagram.com/jtchen78/"
-        },
-      ],
-    };
+  created() {
+    this.fetchLinks(); // 在组件创建时加载数据
   },
 };
 </script>
@@ -87,7 +87,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-
   margin-bottom: 30px;
 }
 
@@ -103,8 +102,7 @@ export default {
 
 .links-item:hover {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-
-  transform: scale(1.10);
+  transform: scale(1.1);
   transition: transform 0.3s ease;
 }
 

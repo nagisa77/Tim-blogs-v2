@@ -35,6 +35,7 @@ export default {
         { name: '首页', path: '/' },
         // { name: '关于', path: '/about' },
         { name: '链接🔗', path: '/links' },
+        { name: 'Products', path: '/products' },
       ],
     },
   },
