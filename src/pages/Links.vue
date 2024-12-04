@@ -70,7 +70,7 @@ export default {
 <style scoped>
 .links-page {
   padding: 60px;
-  height: 100%;
+  height: calc(100vh - 120px);
   color: var(--content-text-color);
   background-color: var(--header-background-color);
 }
