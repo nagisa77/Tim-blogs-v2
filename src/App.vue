@@ -14,7 +14,7 @@
       </el-icon>
     </header>
     <div class="header-content-mobile" :class="{ 'menu-visible': menuVisible }">
-      <HeaderContent />
+      <HeaderContent @route-clicked="handleRouteClicked" />
     </div>
     <div :class="['site-content', { collapsed: isMenuCollapsed }]">
       <router-view />
@@ -44,6 +44,12 @@ export default {
     },
     navigateToHome() {
       this.$router.push('/');
+    },
+    handleRouteClicked(routeName) {
+      console.log(`Route clicked: ${routeName}`);
+      if (this.menuVisible) {
+        this.menuVisible = false;
+      }
     },
   },
 };

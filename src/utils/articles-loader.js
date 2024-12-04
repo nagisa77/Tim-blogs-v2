@@ -6,6 +6,9 @@ export async function loadArticlesFromFirebase() {
     }
     const articles = await response.json();
     console.log("Fetched articles:", articles);
+
+    articles.sort((a, b) => new Date(b.metadata.date) - new Date(a.metadata.date));
+
     return articles;
   } catch (error) {
     console.error("Error loading articles from Cloud Function:", error);

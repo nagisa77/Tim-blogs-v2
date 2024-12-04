@@ -60,6 +60,7 @@ export default {
   height: calc(100vh - 80px);
   overflow-y: auto;
   padding: 40px;
+  box-shadow: inset 20px 0 20px -20px rgba(0, 0, 0, 0.8);
 }
 
 .product-item {
@@ -85,6 +86,7 @@ export default {
 @media (max-width: 649px) {
   .scroll-view {
     height: calc(100vh - 200px);
+    box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8);
   }
 }
 
