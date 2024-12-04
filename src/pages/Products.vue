@@ -70,8 +70,8 @@ export default {
 }
 
 .product-title {
-  font-size: 18px; /* 设置标题字号 */
-  margin-bottom: 3px; /* 减小标题与描述之间的距离 */
+  font-size: 18px;
+  margin-bottom: 3px;
 }
 
 .product-describe {
@@ -81,6 +81,8 @@ export default {
 .product-item:hover {
   background-color: var(--content-card-background-color);
   transform: scale(1.02); 
+  text-decoration: underline;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 649px) {
