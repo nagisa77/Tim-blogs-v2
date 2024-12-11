@@ -69,16 +69,19 @@ export default {
 
 .menu-toggle {
   margin-bottom: 20px;
-  padding: 15px 15px;
-  background-color: var(--article-link-color);
+  padding: 3px 15px;
+  padding-bottom: 5px;
+  background-color: var(--header-background-color);
   border: none;
-  color: var(--button-text-color);
+  color: var(--header-text-color);
   cursor: pointer;
   border-radius: 15px;
+  font-weight: bold;
 }
 
 .menu-toggle:hover {
   background-color: var(--article-link-color);
+  color: var(--header-background-color);
 }
 
 .header-content-mobile {

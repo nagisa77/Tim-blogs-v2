@@ -93,6 +93,13 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+/* 可选：添加放大时的阴影效果 */
+::v-deep img:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
 ::v-deep img {
   margin: 30px auto;
   width: 100%;

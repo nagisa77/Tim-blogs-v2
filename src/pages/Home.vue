@@ -112,6 +112,8 @@ export default {
 .masonry-item:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
+  color: var(--article-link-color);
+  text-decoration: underline;
 }
 
 .content-container {
@@ -140,6 +142,7 @@ export default {
 }
 
 .content-card-text {
+  margin-top: 0px;
   color: var(--content-card-text-color);
   font-weight: bold;
 }
