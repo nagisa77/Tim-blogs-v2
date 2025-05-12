@@ -12,9 +12,10 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { marked } from 'marked';
-import { useRoute } from 'vue-router'; 
+import { useRoute } from 'vue-router';
 import { loadArticlesFromFirebase } from '@/utils/articles-loader';
 import { tailChase } from 'ldrs'
+import { SHA256 } from 'crypto-js';
 
 tailChase.register()
 
@@ -22,18 +23,18 @@ export default {
   name: 'ArticlePage',
   setup() {
     const compiledMarkdown = ref('');
-    const loading = ref(true); // 控制加载状态
+    const loading = ref(true); 
     const route = useRoute();
 
     onMounted(async () => {
-      const articles = await loadArticlesFromFirebase(); // 等待加载文章
+      const articles = await loadArticlesFromFirebase(); 
       for (const article of articles) {
-        if (article.metadata.slug === route.params.slug) {
+        if (SHA256(article.metadata.title).toString() === route.params.slug) {
           compiledMarkdown.value = marked(article.content);
-          break; // 找到后可以退出循环
+          break; 
         }
       }
-      loading.value = false; // 加载完成
+      loading.value = false; 
     });
 
     return {
@@ -70,8 +71,8 @@ export default {
   font-family: monospace;
   color: var(--article-code-text-color);
   font-size: 15px;
-  white-space: pre-wrap; 
-  word-wrap: break-word; 
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 ::v-deep pre {
@@ -111,7 +112,7 @@ export default {
 }
 
 @media (max-width: 649px) {
-  .markdown-container {    
+  .markdown-container {
     box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8);
   }
 }

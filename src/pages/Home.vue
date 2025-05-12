@@ -13,7 +13,7 @@
             <router-link
               v-for="(article, index) in articles"
               :key="index"
-              :to="`/article/${article.metadata.slug}`" 
+              :to="toPath(article)" 
               class="masonry-item"
             >
               <!-- 仅当 imgUrl 存在且不为空字符串时显示图像 -->
@@ -38,6 +38,7 @@
 <script>
 import { loadArticlesFromFirebase } from '@/utils/articles-loader';
 import { tailChase } from 'ldrs'
+import { SHA256 } from 'crypto-js';
 
 tailChase.register()
 
@@ -56,10 +57,17 @@ export default {
     try {
       this.articles = await loadArticlesFromFirebase();
     } finally {
-      this.loading = false; // 加载完成后关闭加载状态
+      this.loading = false; 
     }
   },
+
+  methods: {
+    toPath(article) {
+      return `/article/${SHA256(article.metadata.title).toString()}`;
+    }
+  }
 }
+
 </script>
 
 <style scoped>
