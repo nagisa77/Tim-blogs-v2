@@ -26,7 +26,7 @@ export default {
       type: Array,
       default: () => [
         '在离开之前，一切都是过程. ', 
-        '追求自由～ ',
+        '追求自由. Where fear ends, freedom begins',
       ],
     },
     routes: {
