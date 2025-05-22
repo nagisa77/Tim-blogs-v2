@@ -1,52 +1,62 @@
 # Tim Blog v2
 
-Tim Blog v2 \u662f\u4e00\u4e2a\u57fa\u4e8e Vue 3 \u7684\u535a\u5ba2\u9879\u76ee\uff0c\u4f7f\u7528 Element Plus UI \u5e93\u548c Typed.js \u6765\u63d0\u4f9b\u6d53\u5bc6\u7684\u4ea4\u4e92\u4f53\u9a8c\u3002\u9875\u9762\u5185\u5bb9\u7531\u8fdc\u7a0b API \u52a0\u8f7d\uff0c\u9875\u9762\u4ee5 SPA \u65b9\u5f0f\u5c55\u793a\u3002
+Tim Blog v2 is a single page blog application built with Vue 3. It uses the Element Plus UI library and Typed.js to create an interactive user experience. Article content is loaded from a remote API.
 
-## \u73af\u5883\u9700\u6c42
-- Node.js 14+
+## Requirements
+
+- Node.js 14 or higher
 - npm
 
-## \u5b89\u88c5\u4e0e\u8fd0\u884c
-1. \u4e0b\u8f7d\u4ee3\u7801\uff0c\u5b89\u88c5\u4f9d\u8d56:
+## Installation
+
+1. Install dependencies:
    ```bash
    npm install
    ```
-2. \u542f\u52a8\u672c\u5730\u5f00\u53d1\u670d\u52a1:
+2. Start the development server:
    ```bash
    npm run serve
    ```
-   \u9ed8\u8ba4\u4f1a\u542f\u52a8\u5728 `http://localhost:8080/` \u3002
+   The application will be available at `http://localhost:8080/`.
 
-## \u6784\u5efa\u751f\u4ea7\u73af\u5883
+## Production Build
+
+Generate an optimized build in the `dist/` directory:
 ```bash
 npm run build
 ```
-\u6700\u7ec8\u4ea7\u7269\u4f1a\u751f\u6210\u4e8e `dist/` \u76ee\u5f55\uff0c\u7528\u4e8e\u90e8\u7f72\u3002
+Use the files in `dist/` for deployment.
 
-## \u4ee3\u7801\u68c0\u67e5
+## Code Linting
+
+Run ESLint on the project:
 ```bash
 npm run lint
 ```
-\u5f53\u524d\u9879\u76ee\u4f7f\u7528 ESLint \u68c0\u67e5\u4ee3\u7801\u6837\u5f0f\u548c\u89c4\u8303\u3002
 
-## \u9879\u76ee\u7ed3\u6784
-- `src/main.js` \u8bbe\u7f6e\u9879\u76ee\u5165\u53e3\uff0c\u6ce8\u5165 Vue Router \u548c Element Plus\uff1b
-- `src/router.js` \u914d\u7f6e\u9875\u9762\u8def\u7531\uff0c\u5305\u62ec\u9996\u9875\u3001\u6587\u7ae0\u3001\u94fe\u63a5\u548c\u4ea7\u54c1\u7b49\u9875\u9762\uff1b
-- `src/components/` \u5b58\u653e\u53ef\u91cd\u7528\u7684 Vue \u7ec4\u4ef6\uff0c\u5982\u9876\u90e8\u5206\u987a\u5e8f\u6253\u5b57\u6548\u679c\uff1b
-- `src/pages/` \u662f\u4e3b\u8981\u7684\u9875\u9762\u6587\u4ef6\uff0c\u5305\u62ec\u9996\u9875\u3001\u6587\u7ae0\u8be6\u60c5\u3001\u7cfb\u7edf\u94fe\u63a5\u4ee5\u53ca\u4ea7\u54c1\u7b49\uff1b
-- `src/utils/` \u4e3b\u8981\u5b58\u653e\u6587\u7ae0\u52a0\u8f7d\u7b49\u5de5\u5177\u51fd\u6570\uff1b
-- `src/assets/styles/` \u4e2d\u53ef\u8c03\u6574\u5168\u5c40 CSS \u4e3b\u9898\u6837\u5f0f\u3002
+## Project Structure
 
-## \u4e3b\u8981\u529f\u80fd
-- \u9996\u9875\uff1a\u4ece\u8fdc\u7a0b\u63a5\u53e3\u52a0\u8f7d\u6587\u7ae0\uff0c\u7528\u7cbe\u7f8e\u7684\u77f3\u5899\u5e03\u5c40 (Masonry) \u663e\u793a\uff1b
-- \u6587\u7ae0\u8be6\u60c5\uff1a\u6839\u636e\u6587\u7ae0\u6807\u9898\u7684 SHA256 \u503c\u8def\u7531\uff0c\u53ef\u89e3\u6790 Markdown \u5185\u5bb9\uff1b
-- \u94fe\u63a5\u9875\uff1a\u52a0\u8f7d\u6211\u7684\u8054\u7cfb\u65b9\u5f0f\uff0c\u652f\u6301\u4e00\u952e\u590d\u5236\u3002
-- \u4ea7\u54c1\u9875\uff1a\u663e\u793a\u4ece API \u83b7\u53d6\u7684\u4ea7\u54c1\u5217\u8868\uff0c\u70b9\u51fb\u5373\u53ef\u8df3\u8f6c\u3002
-- \u6307\u5b9a\u8272\u8c03\u548c\u81ea\u5b9a\u4e49\u4e3b\u9898\uff0c\u53ef\u5728 `global.css` \u91cd\u65b0\u8bbe\u7f6e\u989c\u8272\u4ee5\u67d0\u4e9b\u6837\u5f0f\u3002
-- \u54cd\u5e94\u5f0f\u5e03\u5c40\uff1a\u5bf9\u4e8e\u624b\u673a\u548c\u684c\u9762\u5b9e\u65bd\u4e0d\u540c\u7684\u9875\u9762\u6392\u7248\u3002
+- `src/main.js` – Application entry that sets up Vue Router and Element Plus.
+- `src/router.js` – Configures routes for the home page, articles, links and products.
+- `src/components/` – Reusable Vue components, such as the typing effect header.
+- `src/pages/` – Main pages including the home page, article details, link page and products.
+- `src/utils/` – Helper utilities for loading article content.
+- `src/assets/styles/` – Global theme and CSS variables.
 
-## \u81ea\u5b9a\u4e49\n- \u8981\u66f4\u6539\u6587\u7ae0\u6765\u6e90\uff0c\u8bf7\u4fee\u6539 `src/utils/articles-loader.js` \u4e2d\u7684 API \u5730\u5740\u3002
-- \u5bf9 UI \u98ce\u683c\u548c\u8272\u5f69\u6709\u7279\u6b8a\u9700\u6c42\uff0c\u53ef\u76f4\u63a5\u7f16\u8f91 `src/assets/styles/global.css` \u3002
+## Key Features
 
-## \u534f\u8bae
-\u672c\u9879\u76ee\u7531 MIT License \u534f\u8bae\u534f\u8ba8\u4f7f\u7528\u3002
+- **Home page** – Loads articles from a remote API and displays them in a Masonry layout.
+- **Article detail** – Uses a SHA256 hash of the title as the route and renders Markdown content.
+- **Links page** – Shows contact methods with one‑click copy support.
+- **Products page** – Displays products fetched from the API with external links.
+- **Custom theme** – Colors can be adjusted in `global.css` to match your style.
+- **Responsive layout** – Mobile and desktop layouts use different breakpoints for the best experience.
+
+## Customization
+
+- Modify `src/utils/articles-loader.js` to change the article API endpoint.
+- Edit `src/assets/styles/global.css` for custom colors or fonts.
+
+## License
+
+This project is licensed under the MIT License.
