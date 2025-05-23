@@ -59,4 +59,5 @@ npm run lint
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. Additionally, GPL licensing is
+supported for users who prefer the GNU General Public License.
